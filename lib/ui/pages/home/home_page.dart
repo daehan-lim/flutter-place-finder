@@ -56,6 +56,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
               data: (state) {
+                if (state.places.isEmpty) {
+                  return _buildNoResultLayout();
+                }
                 return ListView.separated(
                   padding: const EdgeInsets.only(
                     left: 16,
@@ -130,6 +133,30 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildNoResultLayout() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 500,
+            child: Image.asset('assets/images/no_results.png'),
+          ),
+          // SizedBox(height: 1),
+          Text(
+            '검색 결과가 없습니다',
+            style: TextStyle(
+              fontSize: 25,
+              color: Colors.black87,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: 150),
+        ],
       ),
     );
   }

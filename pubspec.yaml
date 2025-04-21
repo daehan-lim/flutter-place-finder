@@ -28,6 +28,7 @@ dev_dependencies:
 flutter:
   assets:
     - .env
+    - assets/images/
 
   uses-material-design: true
 
