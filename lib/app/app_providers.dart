@@ -4,3 +4,5 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final locationRepositoryProvider = Provider<LocationRepository>(
   (ref) => LocationRepositoryImpl(),
 );
+
+final searchTextProvider = StateProvider<String>((ref) => '');
