@@ -27,11 +27,19 @@ class HomeViewModel extends Notifier<AsyncValue<HomeState>> {
 
   Future<void> fetchPlaces(String query) async {
     final locationRepository = ref.read(locationRepositoryProvider);
-    final previousState = state;
-    state = AsyncLoading();
+
+    // Safely extract current data without directly accessing .value
+    HomeState currentData;
+    if (state is AsyncData<HomeState>) {
+      currentData = (state as AsyncData<HomeState>).value;
+    } else {
+      // Default empty state if we don't have data
+      currentData = HomeState(places: []);
+    }
+    // Set to loading but preserve the previous data
+    state = AsyncLoading<HomeState>().copyWithPrevious(state);
     try {
       final places = await locationRepository.searchPlaces(query);
-      final currentData = previousState.value ?? HomeState(places: []);
       state = AsyncData(currentData.copyWith(places: places));
     } on ApiException catch (e) {
       print(e);
@@ -42,9 +50,10 @@ class HomeViewModel extends Notifier<AsyncValue<HomeState>> {
         '네트워크에 연결할 수 없습니다.\n연결 상태를 확인하고 다시 시도해 주세요.',
         StackTrace.current,
       );
-    } /*catch (_) {
+    } catch (e) {
+      print(e);
       state = AsyncError('문제가 발생했습니다. 다시 시도해주세요.', StackTrace.current);
-    }*/
+    }
   }
 }
 
