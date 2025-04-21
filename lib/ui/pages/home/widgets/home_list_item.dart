@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_place_finder/core/utils/snackbar_util.dart';
 import 'package:flutter_place_finder/ui/pages/web/place_web_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../app/constants/app_colors.dart';
 import '../../../../core/services/map_launcher_service.dart';
@@ -13,16 +14,23 @@ class HomeListItem extends StatelessWidget {
 
   const HomeListItem(this.place, {super.key});
 
+  bool checkIfValidUrl(BuildContext context) {
+    if (place.link.isEmpty) {
+      SnackbarUtil.showSnackBar(context, '링크가 제공되지 않는 장소입니다');
+      return false;
+    } else if (!StringFormatUtils.isValidHttpUrl(place.link)) {
+      SnackbarUtil.showSnackBar(context, '링크가 올바르지 않거나 연결할 수 없습니다');
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       highlightColor: AppColors.lightGrey,
       onTap: () {
-        if (place.link.isEmpty) {
-          SnackbarUtil.showSnackBar(context, '링크가 제공되지 않는 장소입니다');
-        } else if (!StringFormatUtils.isValidHttpUrl(place.link)) {
-          SnackbarUtil.showSnackBar(context, '링크가 올바르지 않거나 연결할 수 없습니다');
-        } else {
+        if (checkIfValidUrl(context)) {
           Navigator.of(
             context,
           ).push(MaterialPageRoute(builder: (context) => PlaceWebPage(place)));
@@ -74,10 +82,17 @@ class HomeListItem extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 _actionButton(
-                  icon: Icons.directions_outlined,
-                  label: '길찾기',
+                  icon: Icons.public,
+                  label: '웹에서 보기',
                   isLoading: false,
-                  onTap: () => print('길찾기: ${place.address}'),
+                  onTap: (() async {
+                    if (checkIfValidUrl(context)) {
+                      await launchUrl(
+                        Uri.parse(place.link),
+                        mode: LaunchMode.inAppBrowserView,
+                      );
+                    }
+                  }),
                 ),
               ],
             ),
