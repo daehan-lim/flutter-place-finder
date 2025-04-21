@@ -68,14 +68,14 @@ class HomePage extends StatelessWidget {
               _actionButton(
                 icon: Icons.map_outlined,
                 label: '지도 보기',
-                onTap: () => MapLauncherService.openInMap(place.roadAddress),
+                onTap: () => MapLauncherService.openInMap(place.address),
               ),
               const SizedBox(width: 8),
               _actionButton(
                 icon: Icons.directions_outlined,
                 label: '길찾기',
                 isLoading: false,
-                onTap: () => print('길찾기: ${place.roadAddress}'),
+                onTap: () => print('길찾기: ${place.address}'),
               ),
             ],
           ),
@@ -95,7 +95,7 @@ class HomePage extends StatelessWidget {
         const SizedBox(width: 4),
         Flexible(
           child: Text(
-            location.roadAddress,
+            location.address,
             style: TextStyle(
               fontSize: 16,
               color: Colors.black.withValues(alpha: 0.8),
