@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_place_finder/app/constants/app_constants.dart';
 
-import '../../../core/map_launcher_service.dart';
+import '../../../core/services/map_launcher_service.dart';
 import '../../../data/model/place.dart';
 
 class HomePage extends StatelessWidget {
