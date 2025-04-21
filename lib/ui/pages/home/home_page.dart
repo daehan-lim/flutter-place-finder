@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_place_finder/app/constants/app_constants.dart';
 import 'package:flutter_place_finder/ui/pages/home/home_view_model.dart';
 import 'package:flutter_place_finder/ui/pages/home/widgets/home_list_item.dart';
+import 'package:flutter_place_finder/ui/widgets/error_layout.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/app_providers.dart';
@@ -48,16 +49,16 @@ class _HomePageState extends State<HomePage> {
                     child: CupertinoActivityIndicator(radius: 20),
                   ),
               error:
-                  (error, StackTrace _) => Center(
-                    child: Text(
-                      error.toString(),
-                      style: const TextStyle(fontSize: 20),
-                      textAlign: TextAlign.center,
-                    ),
+                  (error, StackTrace _) => MessageLayout(
+                    message: error.toString(),
+                    imageUrl: 'assets/images/connection_error.png',
                   ),
               data: (state) {
                 if (state.places.isEmpty) {
-                  return _buildNoResultLayout();
+                  return MessageLayout(
+                    message: '검색 결과가 없습니다',
+                    imageUrl: 'assets/images/no_results.png',
+                  );
                 }
                 return ListView.separated(
                   padding: const EdgeInsets.only(
@@ -133,30 +134,6 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         },
-      ),
-    );
-  }
-
-  Widget _buildNoResultLayout() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 500,
-            child: Image.asset('assets/images/no_results.png'),
-          ),
-          // SizedBox(height: 1),
-          Text(
-            '검색 결과가 없습니다',
-            style: TextStyle(
-              fontSize: 25,
-              color: Colors.black87,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          SizedBox(height: 150),
-        ],
       ),
     );
   }
