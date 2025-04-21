@@ -9,12 +9,15 @@ abstract class LocationRepository {
 }
 
 class LocationRepositoryImpl implements LocationRepository{
-  final Dio _naverClient = buildBaseDio();
+  final Dio _naverClient = buildNaverDio();
 
   @override
   Future<List<Place>> searchPlaces(String query) async {
     try {
-      final response = await _naverClient.get('/search');
+      final response = await _naverClient.get('/local.json', queryParameters: {
+        'query': query,
+        'display': 5,
+      });
       if (response.statusCode == 200) {
         return List<Place>.from(
           NaverPlaceDto.fromJson(

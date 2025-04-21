@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_place_finder/app/constants/app_constants.dart';
 
 Dio buildBaseDio() {
@@ -22,8 +23,8 @@ Dio buildNaverDio() {
   final dio = buildBaseDio();
   dio.options.baseUrl = AppConstants.naverApiBaseUrl;
   dio.options.headers.addAll({
-    'X-Naver-Client-Id': '',
-    'X-Naver-Client-Secret': '',
+    'X-Naver-Client-Id': dotenv.env['NAVER_CLIENT_ID'],
+    'X-Naver-Client-Secret': dotenv.env['NAVER_CLIENT_SECRET'],
   });
   return dio;
 }

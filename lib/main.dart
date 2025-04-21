@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_place_finder/app/constants/app_constants.dart';
 import 'package:flutter_place_finder/ui/pages/home/home_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app/theme.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: '.env');
   runApp(ProviderScope(child: const MyApp()));
 }
 

@@ -79,11 +79,28 @@ class HomeListItem extends StatelessWidget {
         ),
         const SizedBox(width: 4),
         Flexible(
-          child: Text(
-            location.address,
-            style: TextStyle(
+          child: Tooltip(
+            preferBelow: true,
+            message: location.address,
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            textStyle: const TextStyle(
+              color: Colors.white,
               fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+            decoration: BoxDecoration(
               color: Colors.black.withValues(alpha: 0.8),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              location.address,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 15.5,
+                color: Colors.black.withOpacity(0.85),
+              ),
             ),
           ),
         ),

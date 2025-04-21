@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_place_finder/app/constants/app_constants.dart';
+import 'package:flutter_place_finder/ui/pages/home/home_view_model.dart';
 import 'package:flutter_place_finder/ui/pages/home/widgets/home_list_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/app_providers.dart';
-import '../../../core/services/map_launcher_service.dart';
+import '../../../app/constants/app_colors.dart';
 import '../../../data/model/place.dart';
 
 class HomePage extends StatefulWidget {
@@ -38,13 +39,36 @@ class _HomePageState extends State<HomePage> {
             IconButton(icon: const Icon(Icons.gps_fixed), onPressed: () {}),
           ],
         ),
-        body: ListView.separated(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          itemCount: AppConstants.samplePlaces.length,
-          separatorBuilder: (_, __) => const SizedBox(height: 12),
-          itemBuilder: (context, index) {
-            final Place place = AppConstants.samplePlaces[index];
-            return HomeListItem(place);
+        body: Consumer(
+          builder: (context, ref, child) {
+            final homeState = ref.watch(homeViewModelProvider);
+            return homeState.when(
+              loading: () => const Center(child: CupertinoActivityIndicator()),
+              error:
+                  (error, StackTrace _) => Center(
+                    child: Text(
+                      error.toString(),
+                      style: const TextStyle(fontSize: 20),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+              data: (state) {
+                return ListView.separated(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    top: 16,
+                    bottom: 100,
+                  ),
+                  itemCount: state.places.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 12),
+                  itemBuilder: (context, index) {
+                    final Place place = state.places[index];
+                    return HomeListItem(place);
+                  },
+                );
+              },
+            );
           },
         ),
       ),
@@ -56,12 +80,14 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.only(left: 16, right: 3),
       child: Consumer(
         builder: (context, ref, child) {
+          final viewModel = ref.read(homeViewModelProvider.notifier);
           final text = ref.watch(searchTextProvider);
           return TextField(
             controller: searchBarController,
             onChanged: (value) {
               ref.read(searchTextProvider.notifier).state = value;
             },
+            onSubmitted: viewModel.fetchPlaces,
             style: const TextStyle(color: Colors.black, fontSize: 16.5),
             decoration: InputDecoration(
               hintStyle: TextStyle(
@@ -74,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                 horizontal: 16,
               ),
               filled: true,
-              fillColor: Color(0XFFF1F2F1),
+              fillColor: AppColors.lightGrey,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14),
                 borderSide: BorderSide.none,

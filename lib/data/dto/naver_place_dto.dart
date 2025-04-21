@@ -1,3 +1,4 @@
+import 'package:flutter_place_finder/core/utils/string_format_utils.dart';
 import 'package:flutter_place_finder/data/model/place.dart';
 
 class NaverPlaceDto {
@@ -87,9 +88,9 @@ class ItemDto {
   };
 
   Place toModel() => Place(
-    title: title,
-    category: category,
-    address: roadAddress,
+    title: StringFormatUtils.cleanHtml(title),
+    category: StringFormatUtils.formatCategory(category),
+    address: address,
     link: link,
   );
 }
