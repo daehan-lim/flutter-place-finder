@@ -62,7 +62,12 @@ class _HomePageState extends State<HomePage> {
             onChanged: (value) {
               ref.read(searchTextProvider.notifier).state = value;
             },
+            style: const TextStyle(color: Colors.black, fontSize: 16.5),
             decoration: InputDecoration(
+              hintStyle: TextStyle(
+                color: Colors.black.withValues(alpha: 0.65),
+                fontSize: 16,
+              ),
               hintText: '장소 이름, 또는 주소를 입력해 주세요',
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 4,
@@ -73,6 +78,14 @@ class _HomePageState extends State<HomePage> {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14),
                 borderSide: BorderSide.none,
+              ),
+              prefixIconConstraints: const BoxConstraints(
+                minWidth: 0,
+                minHeight: 0,
+              ),
+              prefixIcon: Padding(
+                padding: const EdgeInsets.only(left: 7, right: 6),
+                child: Icon(Icons.search, size: 21),
               ),
               suffixIcon:
                   text.isNotEmpty
