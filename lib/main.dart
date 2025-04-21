@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_place_finder/app/constants/app_constants.dart';
 import 'package:flutter_place_finder/ui/pages/home/home_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app/theme.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
