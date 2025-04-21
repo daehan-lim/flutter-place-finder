@@ -14,23 +14,16 @@ class HomeListItem extends StatelessWidget {
 
   const HomeListItem(this.place, {super.key});
 
-  bool checkIfValidUrl(BuildContext context) {
-    if (place.link.isEmpty) {
-      SnackbarUtil.showSnackBar(context, '링크가 제공되지 않는 장소입니다');
-      return false;
-    } else if (!StringFormatUtils.isValidHttpUrl(place.link)) {
-      SnackbarUtil.showSnackBar(context, '링크가 올바르지 않거나 연결할 수 없습니다');
-      return false;
-    }
-    return true;
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
       highlightColor: AppColors.lightGrey,
       onTap: () {
-        if (checkIfValidUrl(context)) {
+        if (place.link.isEmpty) {
+          SnackbarUtil.showSnackBar(context, '링크가 제공되지 않는 장소입니다');
+        } else if (!StringFormatUtils.isValidHttpUrl(place.link)) {
+          SnackbarUtil.showSnackBar(context, '링크가 올바르지 않거나 연결할 수 없습니다');
+        } else {
           Navigator.of(
             context,
           ).push(MaterialPageRoute(builder: (context) => PlaceWebPage(place)));
@@ -83,15 +76,13 @@ class HomeListItem extends StatelessWidget {
                 const SizedBox(width: 8),
                 _actionButton(
                   icon: Icons.public,
-                  label: '웹에서 보기',
+                  label: '네이버 검색',
                   isLoading: false,
                   onTap: (() async {
-                    if (checkIfValidUrl(context)) {
-                      await launchUrl(
-                        Uri.parse(place.link),
-                        mode: LaunchMode.inAppBrowserView,
-                      );
-                    }
+                    await launchUrl(
+                      Uri.parse('https://search.naver.com/search.naver?query=${place.title}'),
+                      mode: LaunchMode.inAppBrowserView,
+                    );
                   }),
                 ),
               ],
