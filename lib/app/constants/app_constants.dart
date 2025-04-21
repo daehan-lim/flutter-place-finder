@@ -2,7 +2,8 @@ import '../../data/model/place.dart';
 
 class AppConstants {
   static const appTitle = '어디든GO';
-  static const randomImageUrl = 'https://picsum.photos/';
+  static const naverApiBaseUrl = 'https://openapi.naver.com/v1/search';
+  static const vworldApiBaseUrl = 'https://api.vworld.kr/req';
 
   static const samplePlaces = [
     Place(
