@@ -18,6 +18,7 @@ dependencies:
   flutter_riverpod: ^2.6.1
   flutter_dotenv: ^5.2.1
   flutter_inappwebview: ^6.1.5
+  geolocator: ^14.0.0
 
 dev_dependencies:
   flutter_test:

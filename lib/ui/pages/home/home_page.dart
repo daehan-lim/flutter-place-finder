@@ -31,11 +31,13 @@ class _HomePageState extends State<HomePage> {
     return Consumer(
       builder: (context, ref, child) {
         final homeState = ref.watch(homeViewModelProvider);
+        final homeViewModel = ref.read(homeViewModelProvider.notifier);
         return GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             backgroundColor: Colors.white, // iOS-style
             appBar: AppBar(
+              backgroundColor: Colors.white,
               title: _buildSearchBar(),
               titleSpacing: 0,
               actionsPadding: EdgeInsets.only(right: 2),
@@ -43,8 +45,8 @@ class _HomePageState extends State<HomePage> {
                 IconButton(
                   icon: const Icon(Icons.gps_fixed),
                   onPressed: () {
-                    searchBarController.text = '[현재 위치]';
-                    ref.read(searchTextProvider.notifier).state = '[현재 위치]';
+                    ref.read(searchTextProvider.notifier).state = AppConstants.currentLocationKeyword;
+                    homeViewModel.fetchPlaces(AppConstants.currentLocationKeyword);
                   },
                 ),
               ],
@@ -95,6 +97,11 @@ class _HomePageState extends State<HomePage> {
         builder: (context, ref, child) {
           final viewModel = ref.read(homeViewModelProvider.notifier);
           final text = ref.watch(searchTextProvider);
+
+          if (searchBarController.text != text) {
+            searchBarController.text = text;
+          }
+
           return TextField(
             controller: searchBarController,
             onChanged: (value) {
@@ -132,7 +139,6 @@ class _HomePageState extends State<HomePage> {
                         iconSize: 21,
                         icon: const Icon(Icons.cancel_outlined),
                         onPressed: () {
-                          searchBarController.clear();
                           ref.read(searchTextProvider.notifier).state = '';
                         },
                       )

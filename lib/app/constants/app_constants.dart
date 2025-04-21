@@ -4,6 +4,8 @@ class AppConstants {
   static const appTitle = '어디든GO';
   static const naverApiBaseUrl = 'https://openapi.naver.com/v1/search';
   static const vworldApiBaseUrl = 'https://api.vworld.kr/req';
+  static const currentLocationKeyword = '[내 위치]';
+  static const envErrorMessage = '.env 파일에 VWORLD_API_KEY, NAVER_CLIENT_ID, NAVER_CLIENT_SECRET 값을 모두 설정해주세요.';
 
   static const samplePlaces = [
     Place(

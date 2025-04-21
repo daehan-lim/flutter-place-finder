@@ -21,3 +21,14 @@ class NetworkException implements Exception {
     return 'NetworkException: $message';
   }
 }
+
+class EnvFileException implements Exception {
+  final String message;
+
+  EnvFileException(this.message);
+
+  @override
+  String toString() {
+    return 'EnvFileException: $message';
+  }
+}
