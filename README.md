@@ -10,18 +10,18 @@
 
 <div style="background-color: #F1F2F1; padding: 20px; border-radius: 12px;">
   <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: flex-start;">
-    <img src="images/1.png" width="240" />
-    <img src="images/2.png" width="240" />
-    <img src="images/3.png" width="240" />
-    <img src="images/4.jpg" width="240" />
-    <img src="images/5.jpg" width="240" />
-    <img src="images/6.jpg" width="240" />
-    <img src="images/7.jpg" width="240" />
-    <img src="images/8.png" width="240" />
-    <img src="images/9.png" width="240" />
-    <img src="images/10.png" width="240" />
-    <img src="images/11.png" width="240" />
-    <img src="images/12.png" width="240" />
+    <img src="images/1.png" width="270" />
+    <img src="images/2.png" width="270" />
+    <img src="images/3.png" width="270" />
+    <img src="images/4.jpg" width="270" />
+    <img src="images/5.jpg" width="270" />
+    <img src="images/6.jpg" width="270" />
+    <img src="images/7.jpg" width="270" />
+    <img src="images/8.png" width="270" />
+    <img src="images/9.png" width="270" />
+    <img src="images/10.png" width="270" />
+    <img src="images/11.png" width="270" />
+    <img src="images/12.png" width="270" />
   </div>
 </div>
 
