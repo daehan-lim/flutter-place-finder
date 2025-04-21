@@ -26,6 +26,9 @@ class HomeState {
 class HomeViewModel extends Notifier<AsyncValue<HomeState>> {
   @override
   AsyncValue<HomeState> build() {
+    Future.microtask(() {
+      fetchPlaces(AppConstants.currentLocationKeyword);
+    });
     return AsyncData(HomeState(places: []));
   }
 
@@ -49,7 +52,7 @@ class HomeViewModel extends Notifier<AsyncValue<HomeState>> {
         final String? district = await _getDistrictByLocation();
         if (district == null) {
           state = AsyncError(
-            '위치를 불러올 수 없어요. GPS나 위치 권한을 확인해 주세요',
+            '위치를 불러올 수 없습니다. GPS나 위치 권한을 확인해 주세요',
             StackTrace.current,
           );
           return;
