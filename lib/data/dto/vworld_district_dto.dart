@@ -132,7 +132,7 @@ class FeatureCollection {
   Map<String, dynamic> toJson() => {
     "type": type,
     "bbox": bbox.map((x) => x).toList(),
-    "features": features.map((x) => x?.toJson()).toList(),
+    "features": features.map((x) => x.toJson()).toList(),
   };
 }
 

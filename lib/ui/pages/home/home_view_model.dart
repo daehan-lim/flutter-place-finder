@@ -47,7 +47,7 @@ class HomeViewModel extends Notifier<AsyncValue<HomeState>> {
     // await Future.delayed(Duration(seconds: 10));
 
     try {
-    final locationRepository = ref.read(locationRepositoryProvider);
+      final locationRepository = ref.read(locationRepositoryProvider);
       if (query.startsWith(AppConstants.currentLocationKeyword)) {
         final String? district = await _getDistrictByLocation();
         if (district == null) {
@@ -58,8 +58,12 @@ class HomeViewModel extends Notifier<AsyncValue<HomeState>> {
           return;
         }
         query = district;
-        ref.read(searchTextProvider.notifier).state =
-            '${AppConstants.currentLocationKeyword} $district';
+        if (ref
+            .read(searchTextProvider)
+            .startsWith(AppConstants.currentLocationKeyword)) {
+          ref.read(searchTextProvider.notifier).state =
+              '${AppConstants.currentLocationKeyword} $district';
+        }
       }
 
       final places = await locationRepository.searchPlaces(query);
