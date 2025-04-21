@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_place_finder/core/utils/snackbar_util.dart';
+import 'package:flutter_place_finder/ui/pages/web/place_web_page.dart';
 
 import '../../../../app/constants/app_colors.dart';
 import '../../../../core/services/map_launcher_service.dart';
@@ -14,7 +16,15 @@ class HomeListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       highlightColor: AppColors.lightGrey,
-      onTap: () {},
+      onTap: () {
+        if (place.link.isEmpty) {
+          SnackbarUtil.showSnackBar(context, '링크가 제공되지 않는 장소입니다');
+          return;
+        }
+        Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (context) => PlaceWebPage(place)));
+      },
       child: Ink(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -122,13 +132,13 @@ class HomeListItem extends StatelessWidget {
     return TextButton.icon(
       onPressed: isLoading ? null : onTap,
       icon:
-      isLoading
-          ? const SizedBox(
-        width: 16,
-        height: 16,
-        child: CupertinoActivityIndicator(color: Colors.blueAccent),
-      )
-          : Icon(icon, size: 18, color: Colors.blueAccent),
+          isLoading
+              ? const SizedBox(
+                width: 16,
+                height: 16,
+                child: CupertinoActivityIndicator(color: Colors.blueAccent),
+              )
+              : Icon(icon, size: 18, color: Colors.blueAccent),
       label: Text(
         label,
         style: TextStyle(

@@ -14,6 +14,10 @@ class AppTheme {
       ).copyWith(primary: AppColors.primary),
       highlightColor: Colors.grey,
 
+      textTheme: const TextTheme(
+        bodyMedium: TextStyle(fontSize: 16), // default for most Text
+      ), // sets text style for all texts
+
       appBarTheme: AppBarTheme(
         scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
