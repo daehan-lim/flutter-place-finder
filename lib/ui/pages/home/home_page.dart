@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_place_finder/app/constants/app_constants.dart';
 
+import '../../../core/map_launcher_service.dart';
 import '../../../data/model/location_model.dart';
 
 class HomePage extends StatelessWidget {
@@ -66,7 +67,7 @@ class HomePage extends StatelessWidget {
               _actionButton(
                 icon: Icons.map_outlined,
                 label: '지도 보기',
-                onTap: () => {}, // MapLauncherService.openLocationInMaps(location.roadAddress),
+                onTap: () => MapLauncherService.openInMap(location.roadAddress),
               ),
               const SizedBox(width: 8),
               _actionButton(
