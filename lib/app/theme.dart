@@ -19,7 +19,11 @@ class AppTheme {
         backgroundColor: Colors.transparent,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         centerTitle: true,
-        titleTextStyle: TextStyle(fontSize: 22, color: Colors.black87),
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          color: Colors.black87,
+          fontWeight: FontWeight.bold,
+        ),
       ),
 
       elevatedButtonTheme: ElevatedButtonThemeData(
