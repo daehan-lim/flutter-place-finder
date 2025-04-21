@@ -5,6 +5,7 @@ import 'package:flutter_place_finder/ui/pages/web/place_web_page.dart';
 
 import '../../../../app/constants/app_colors.dart';
 import '../../../../core/services/map_launcher_service.dart';
+import '../../../../core/utils/string_format_utils.dart';
 import '../../../../data/model/place.dart';
 
 class HomeListItem extends StatelessWidget {
@@ -19,11 +20,13 @@ class HomeListItem extends StatelessWidget {
       onTap: () {
         if (place.link.isEmpty) {
           SnackbarUtil.showSnackBar(context, '링크가 제공되지 않는 장소입니다');
-          return;
+        } else if (!StringFormatUtils.isValidHttpUrl(place.link)) {
+          SnackbarUtil.showSnackBar(context, '링크가 올바르지 않거나 연결할 수 없습니다');
+        } else {
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (context) => PlaceWebPage(place)));
         }
-        Navigator.of(
-          context,
-        ).push(MaterialPageRoute(builder: (context) => PlaceWebPage(place)));
       },
       child: Ink(
         decoration: BoxDecoration(
