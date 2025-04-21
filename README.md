@@ -9,19 +9,20 @@
 ## 📱 스크린샷
 
 <div style="display: flex; overflow-x: auto; border: 2px solid #ccc; padding: 6px; border-radius: 8px;">  
-  <img src="images/1.png" width="240" style="margin-right: 5px;" />  
-  <img src="images/2.png" width="240" style="margin-right: 5px;" />  
-  <img src="images/3.png" width="240" style="margin-right: 5px;" />  
-  <img src="images/4.jpg" width="240" style="margin-right: 5px;" />  
-  <img src="images/5.jpg" width="240" style="margin-right: 5px;" />  
-  <img src="images/6.jpg" width="240" style="margin-right: 5px;" />  
-  <img src="images/7.jpg" width="240" style="margin-right: 5px;" />  
-  <img src="images/8.png" width="240" style="margin-right: 5px;" />  
-  <img src="images/9.png" width="240" style="margin-right: 5px;" />  
-  <img src="images/10.png" width="240" style="margin-right: 5px;" />  
-  <img src="images/11.png" width="240" style="margin-right: 5px;" />  
-  <img src="images/12.png" width="240" />  
+  <img src="images/1.png" width="240" style="margin-right: 20px; margin-bottom: 20px;" />  
+  <img src="images/2.png" width="240" style="margin-right: 20px; margin-bottom: 20px;" />  
+  <img src="images/3.png" width="240" style="margin-right: 20px; margin-bottom: 20px;" />  
+  <img src="images/4.jpg" width="240" style="margin-right: 20px; margin-bottom: 20px;" />  
+  <img src="images/5.jpg" width="240" style="margin-right: 20px; margin-bottom: 20px;" />  
+  <img src="images/6.jpg" width="240" style="margin-right: 20px; margin-bottom: 20px;" />  
+  <img src="images/7.jpg" width="240" style="margin-right: 20px; margin-bottom: 20px;" />  
+  <img src="images/8.png" width="240" style="margin-right: 20px; margin-bottom: 20px;" />  
+  <img src="images/9.png" width="240" style="margin-right: 20px; margin-bottom: 20px;" />  
+  <img src="images/10.png" width="240" style="margin-right: 20px; margin-bottom: 20px;" />  
+  <img src="images/11.png" width="240" style="margin-right: 20px; margin-bottom: 20px;" />  
+  <img src="images/12.png" width="240" style="margin-bottom: 20px;" />  
 </div>
+
 
 
 ## 🎯 주요 기능
