@@ -26,8 +26,9 @@ class HomeViewModel extends Notifier<AsyncValue<HomeState>> {
   }
 
   Future<void> fetchPlaces(String query) async {
-    final locationRepository = ref.read(locationRepositoryProvider);
+    if (query.isEmpty) return;
 
+    final locationRepository = ref.read(locationRepositoryProvider);
     // Safely extract current data without directly accessing .value
     HomeState currentData;
     if (state is AsyncData<HomeState>) {
