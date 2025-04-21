@@ -40,6 +40,8 @@ android/app/release/
 ios/Flutter/Flutter.framework
 ios/Flutter/Flutter.podspec
 ios/Flutter/Generated.xcconfig
+ios/Flutter/Debug.xcconfig
+ios/Flutter/Release.xcconfig
 ios/Flutter/flutter_export_environment.sh
 ios/Flutter/ephemeral/
 ios/Flutter/app.* # old assets
@@ -54,6 +56,10 @@ macos/Flutter/ephemeral/
 macos/Pods/
 macos/.symlinks/
 macos/xcuserdata/
+macos/Flutter/GeneratedPluginRegistrant.swift
+macos/Flutter/Flutter-Debug.xcconfig
+macos/Flutter/Flutter-Release.xcconfig
+macos/Flutter/Generated.xcconfig
 
 # Xcode specific
 **/*.xcodeproj/project.xcworkspace/
@@ -73,8 +79,11 @@ web/.dart_tool/
 windows/flutter/ephemeral/
 windows/.vs/
 windows/flutter/generated_plugins.cmake
+windows/flutter/generated_plugin_registrant.cc
+
 linux/flutter/ephemeral/
 linux/flutter/generated_plugins.cmake
+linux/flutter/generated_plugin_registrant.cc
 
 # ----------------------------------------
 # IDEs and editor settings
