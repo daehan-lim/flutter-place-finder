@@ -28,22 +28,28 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        backgroundColor: Colors.white, // iOS-style
-        appBar: AppBar(
-          title: _buildSearchBar(),
-          titleSpacing: 0,
-          actionsPadding: EdgeInsets.only(right: 2),
-          actions: [
-            IconButton(icon: const Icon(Icons.gps_fixed), onPressed: () {}),
-          ],
-        ),
-        body: Consumer(
-          builder: (context, ref, child) {
-            final homeState = ref.watch(homeViewModelProvider);
-            return homeState.when(
+    return Consumer(
+      builder: (context, ref, child) {
+        final homeState = ref.watch(homeViewModelProvider);
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Scaffold(
+            backgroundColor: Colors.white, // iOS-style
+            appBar: AppBar(
+              title: _buildSearchBar(),
+              titleSpacing: 0,
+              actionsPadding: EdgeInsets.only(right: 2),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.gps_fixed),
+                  onPressed: () {
+                    searchBarController.text = '[현재 위치]';
+                    ref.read(searchTextProvider.notifier).state = '[현재 위치]';
+                  },
+                ),
+              ],
+            ),
+            body: homeState.when(
               loading:
                   () => const Center(
                     child: CupertinoActivityIndicator(radius: 20),
@@ -75,10 +81,10 @@ class _HomePageState extends State<HomePage> {
                   },
                 );
               },
-            );
-          },
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 
