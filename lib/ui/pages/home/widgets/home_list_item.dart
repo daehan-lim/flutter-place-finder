@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../app/constants/app_colors.dart';
 import '../../../../core/services/map_launcher_service.dart';
 import '../../../../data/model/place.dart';
 
@@ -11,60 +12,64 @@ class HomeListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade200),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            place.title,
-            style: const TextStyle(
-              fontSize: 19,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
+    return InkWell(
+      highlightColor: AppColors.lightGrey,
+      onTap: () {},
+      child: Ink(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey.shade200),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.1),
+              blurRadius: 10,
+              offset: const Offset(0, 2),
             ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            place.category,
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.black.withValues(alpha: 0.65),
+          ],
+        ),
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              place.title,
+              style: const TextStyle(
+                fontSize: 19,
+                fontWeight: FontWeight.w600,
+                color: Colors.black87,
+              ),
             ),
-          ),
-          const SizedBox(height: 6),
-          _buildAddressRow(place),
-          const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              _actionButton(
-                icon: Icons.map_outlined,
-                label: '지도 보기',
-                onTap: () => MapLauncherService.openInMap(place.address),
+            const SizedBox(height: 6),
+            Text(
+              place.category,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.black.withValues(alpha: 0.65),
               ),
-              const SizedBox(width: 8),
-              _actionButton(
-                icon: Icons.directions_outlined,
-                label: '길찾기',
-                isLoading: false,
-                onTap: () => print('길찾기: ${place.address}'),
-              ),
-            ],
-          ),
-        ],
+            ),
+            const SizedBox(height: 6),
+            _buildAddressRow(place),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                _actionButton(
+                  icon: Icons.map_outlined,
+                  label: '지도 보기',
+                  onTap: () => MapLauncherService.openInMap(place.address),
+                ),
+                const SizedBox(width: 8),
+                _actionButton(
+                  icon: Icons.directions_outlined,
+                  label: '길찾기',
+                  isLoading: false,
+                  onTap: () => print('길찾기: ${place.address}'),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
