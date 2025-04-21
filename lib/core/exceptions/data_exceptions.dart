@@ -13,12 +13,11 @@ class ApiException implements Exception {
 
 class NetworkException implements Exception {
   final String message;
-  final Error? cause;
 
-  NetworkException(this.message, [this.cause]);
+  NetworkException(this.message);
 
   @override
   String toString() {
-    return 'NetworkException: $message\n$cause';
+    return 'NetworkException: $message';
   }
 }
