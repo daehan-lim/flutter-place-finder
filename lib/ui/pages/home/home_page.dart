@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_place_finder/app/constants/app_constants.dart';
 
@@ -73,6 +74,7 @@ class HomePage extends StatelessWidget {
               _actionButton(
                 icon: Icons.directions_outlined,
                 label: '길찾기',
+                isLoading: false,
                 onTap: () => print('길찾기: ${location.roadAddress}'),
               ),
             ],
@@ -84,40 +86,48 @@ class HomePage extends StatelessWidget {
 
   Row _buildAddressRow(LocationModel location) {
     return Row(
-          children: [
-            Icon(
-              Icons.location_on_outlined,
-              size: 16,
+      children: [
+        Icon(
+          Icons.location_on_outlined,
+          size: 16,
+          color: Colors.black.withValues(alpha: 0.8),
+        ),
+        const SizedBox(width: 4),
+        Flexible(
+          child: Text(
+            location.roadAddress,
+            style: TextStyle(
+              fontSize: 16,
               color: Colors.black.withValues(alpha: 0.8),
             ),
-            const SizedBox(width: 4),
-            Flexible(
-              child: Text(
-                location.roadAddress,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black.withValues(alpha: 0.8),
-                ),
-              ),
-            ),
-          ],
-        );
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _actionButton({
     required IconData icon,
     required String label,
     required VoidCallback onTap,
+    bool isLoading = false,
   }) {
     return TextButton.icon(
-      onPressed: onTap,
-      icon: Icon(icon, size: 18, color: Colors.blueAccent),
+      onPressed: isLoading ? null : onTap,
+      icon:
+          isLoading
+              ? const SizedBox(
+                width: 16,
+                height: 16,
+                child: CupertinoActivityIndicator(color: Colors.blueAccent),
+              )
+              : Icon(icon, size: 18, color: Colors.blueAccent),
       label: Text(
         label,
-        style: const TextStyle(
-          fontSize: 14,
+        style: TextStyle(
+          fontSize: 14.5,
           color: Colors.blueAccent,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w600,
         ),
       ),
       style: TextButton.styleFrom(
