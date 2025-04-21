@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Colors.white,
               title: _buildSearchBar(),
               titleSpacing: 0,
+              toolbarHeight: 80,
               actionsPadding: EdgeInsets.only(right: 2),
               actions: [
                 IconButton(
@@ -72,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.only(
                     left: 16,
                     right: 16,
-                    top: 16,
+                    top: 5,
                     bottom: 100,
                   ),
                   itemCount: state.places.length,
@@ -92,7 +93,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildSearchBar() {
     return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 3),
+      padding: const EdgeInsets.only(left: 16, right: 3, top: 12, bottom: 12),
       child: Consumer(
         builder: (context, ref, child) {
           final viewModel = ref.read(homeViewModelProvider.notifier);
