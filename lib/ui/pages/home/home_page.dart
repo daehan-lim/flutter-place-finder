@@ -43,7 +43,10 @@ class _HomePageState extends State<HomePage> {
           builder: (context, ref, child) {
             final homeState = ref.watch(homeViewModelProvider);
             return homeState.when(
-              loading: () => const Center(child: CupertinoActivityIndicator()),
+              loading:
+                  () => const Center(
+                    child: CupertinoActivityIndicator(radius: 20),
+                  ),
               error:
                   (error, StackTrace _) => Center(
                     child: Text(
