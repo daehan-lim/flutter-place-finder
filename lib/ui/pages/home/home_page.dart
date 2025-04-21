@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_place_finder/app/constants/app_constants.dart';
 
 import '../../../core/map_launcher_service.dart';
-import '../../../data/model/location_model.dart';
+import '../../../data/model/place.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -15,17 +15,17 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: const Text('장소 목록')),
       body: ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        itemCount: AppConstants.sampleLocations.length,
+        itemCount: AppConstants.samplePlaces.length,
         separatorBuilder: (_, __) => const SizedBox(height: 12),
         itemBuilder: (context, index) {
-          final LocationModel location = AppConstants.sampleLocations[index];
-          return _buildListItem(location);
+          final Place place = AppConstants.samplePlaces[index];
+          return _buildListItem(place);
         },
       ),
     );
   }
 
-  Container _buildListItem(LocationModel location) {
+  Container _buildListItem(Place place) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            location.title,
+            place.title,
             style: const TextStyle(
               fontSize: 19,
               fontWeight: FontWeight.w600,
@@ -53,14 +53,14 @@ class HomePage extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            location.category,
+            place.category,
             style: TextStyle(
               fontSize: 15,
               color: Colors.black.withValues(alpha: 0.65),
             ),
           ),
           const SizedBox(height: 6),
-          _buildAddressRow(location),
+          _buildAddressRow(place),
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -68,14 +68,14 @@ class HomePage extends StatelessWidget {
               _actionButton(
                 icon: Icons.map_outlined,
                 label: '지도 보기',
-                onTap: () => MapLauncherService.openInMap(location.roadAddress),
+                onTap: () => MapLauncherService.openInMap(place.roadAddress),
               ),
               const SizedBox(width: 8),
               _actionButton(
                 icon: Icons.directions_outlined,
                 label: '길찾기',
                 isLoading: false,
-                onTap: () => print('길찾기: ${location.roadAddress}'),
+                onTap: () => print('길찾기: ${place.roadAddress}'),
               ),
             ],
           ),
@@ -84,7 +84,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Row _buildAddressRow(LocationModel location) {
+  Row _buildAddressRow(Place location) {
     return Row(
       children: [
         Icon(
