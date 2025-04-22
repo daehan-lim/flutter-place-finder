@@ -7,22 +7,23 @@ import 'package:geolocator/geolocator.dart';
 
 import '../../../app/constants/app_constants.dart';
 
+/// State class for the home screen.
+///
+/// Holds the list of places and in the future, additional attributes
 class HomeState {
   final List<Place> places;
-  final double? lat;
-  final double? lon;
 
-  HomeState({required this.places, this.lat, this.lon});
+  HomeState({required this.places});
 
+  /// Creates a copy of this state with optional new values.
+  ///
+  /// Parameters that are null will keep their current values.
   HomeState copyWith({List<Place>? places, double? lat, double? lon}) {
-    return HomeState(
-      places: places ?? this.places,
-      lat: lat ?? this.lat,
-      lon: lon ?? this.lon,
-    );
+    return HomeState(places: places ?? this.places);
   }
 }
 
+/// ViewModel for the home screen that manages place data and search operations.
 class HomeViewModel extends Notifier<AsyncValue<HomeState>> {
   @override
   AsyncValue<HomeState> build() {
@@ -32,6 +33,13 @@ class HomeViewModel extends Notifier<AsyncValue<HomeState>> {
     return AsyncData(HomeState(places: []));
   }
 
+  /// Fetches places based on the provided query string.
+  ///
+  /// If the query starts with the current location keyword, it will get
+  /// the user's current location and search for places in that district.
+  /// Updates the state with loading, error, or success states during the process.
+  ///
+  /// [query] The search term to find places.
   Future<void> fetchPlaces(String query) async {
     if (query.isEmpty || state is AsyncLoading) return;
 
@@ -86,6 +94,13 @@ class HomeViewModel extends Notifier<AsyncValue<HomeState>> {
     }
   }
 
+  /// Gets the district name for the current device location.
+  ///
+  /// Retrieves the current position using geolocation services,
+  /// then uses the location repository to get the district name
+  /// corresponding to those coordinates.
+  ///
+  /// Returns the district name as a string, or null if position not available.
   Future<String?> _getDistrictByLocation() async {
     final Position? position = await GeolocatorUtil.getPosition();
     if (position == null) {
