@@ -1,6 +1,6 @@
 # 어이든GO - 지역 검색 앱
 
-<p align="center"> <img src="/images/app_icon.png" alt="어이든GO 앱 아이콘" width="150" style="border-radius: 20px;"/> </p>
+<p align="center"> <img src="/images/app_logo.png" alt="어이든GO 앱 아이콘" width="150"/> </p>
 
 ## 📌 프로젝트 소개
 
